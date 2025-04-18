@@ -23,8 +23,9 @@ a > span:hover {
     color: red;
 }
 
-.header__icon {
-    width: 80px;
+.header_icon {
+    width: 180px;
+    height: 100%;
     cursor: pointer;
 }
 
