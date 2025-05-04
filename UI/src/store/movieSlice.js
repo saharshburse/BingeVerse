@@ -9,11 +9,35 @@ export const fetchPopularMovies = createAsyncThunk(
   }
 );
 
+export const addToWatchlist = createAsyncThunk(
+  "watchlist/add",
+  async (movie, thunkAPI) => {
+    const token = localStorage.getItem("token");
+    const response = await axios.post("http://localhost:8080/api/watchlist/add", movie, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  }
+);
+
+export const fetchWatchlist = createAsyncThunk(
+  "watchlist/fetch",
+  async (email) => {
+    const response = await axios.get(`http://localhost:8080/api/watchlist/${email}`);
+    return response.data;
+  }
+);
+
+
 const movieSlice = createSlice({
   name: 'movies',
   initialState: {
     list: [],
     popularMovies: [],
+    items: [],
+    loading: false,
   },
   reducers: {
     setMovies(state, action) {
