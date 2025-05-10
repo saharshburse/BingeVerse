@@ -1,4 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+
+
 
 export const fetchPopularMovies = createAsyncThunk(
   'movies/fetchPopularMovies',
@@ -13,7 +17,7 @@ export const addToWatchlist = createAsyncThunk(
   "watchlist/add",
   async (movie, thunkAPI) => {
     const token = localStorage.getItem("token");
-    const response = await axios.post("http://localhost:8080/api/watchlist/add", movie, {
+    const response = await axios.post(`${BASE_URL}/watchlist/add`, movie, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -25,7 +29,7 @@ export const addToWatchlist = createAsyncThunk(
 export const fetchWatchlist = createAsyncThunk(
   "watchlist/fetch",
   async (email) => {
-    const response = await axios.get(`http://localhost:8080/api/watchlist/${email}`);
+    const response = await axios.get(`${BASE_URL}/watchlist/${email}`);
     return response.data;
   }
 );

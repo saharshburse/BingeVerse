@@ -8,7 +8,7 @@ export const addToWatchlist = createAsyncThunk(
   async ({ movie, token }, { rejectWithValue }) => {
     try {
       const res = await axios.post(
-        `http://localhost:8080/api/watchlist/add`,
+        `${BASE_URL}/watchlist/add`,
         movie,
         {
           headers: {
@@ -31,7 +31,7 @@ export const fetchWatchlist = createAsyncThunk(
     try {
       console.log("api")
       const res = await axios.get(
-        `http://localhost:8080/api/watchlist`,
+        `${BASE_URL}/watchlist`,
         {
           
           headers: {
@@ -51,7 +51,7 @@ export const removeFromWatchlist = createAsyncThunk(
   async ({ id, token }, { rejectWithValue }) => {
     try {
       const res = await axios.delete(
-        `http://localhost:8080/api/watchlist/${id}`,
+        `${BASE_URL}/watchlist/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
