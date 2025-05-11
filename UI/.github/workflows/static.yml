@@ -1,20 +1,16 @@
-name: Deploy React UI to GitHub Pages
+name: Deploy Vite React App to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # or your default branch
+      - main  # Change if your default branch is something else
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: UI/BingeVerse
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -22,14 +18,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Dependencies
+      - name: Install dependencies
+        working-directory: UI/BingeVerse
         run: npm install
 
-      - name: Build React App
+      - name: Build the app
+        working-directory: UI/BingeVerse
         run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: UI/BingeVerse/build
+          publish_dir: UI/BingeVerse/dist
