@@ -18,7 +18,7 @@ jobs:
           node-version: 18
 
       - name: Navigate to UI folder
-        working-directory: UI/BingeVerse
+        working-directory: UI
         run: |
           npm install
           npm run build
@@ -27,4 +27,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: UI/BingeVerse/dist
+          publish_dir: UI/dist
