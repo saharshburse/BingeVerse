@@ -1,12 +1,11 @@
-name: Deploy Vite React App to GitHub Pages
+name: Deploy React Vite App to GitHub Pages
 
 on:
   push:
-    branches:
-      - main  # Change if your default branch is something else
+    branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,13 +17,11 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Navigate to UI folder
         working-directory: UI/BingeVerse
-        run: npm install
-
-      - name: Build the app
-        working-directory: UI/BingeVerse
-        run: npm run build
+        run: |
+          npm install
+          npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
